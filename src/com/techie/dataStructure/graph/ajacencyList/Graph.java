@@ -30,8 +30,8 @@ public class Graph {
     public void addEdge(String label1, String label2){
         Vertex vertex1 = new Vertex(label1);
         Vertex vertex2 = new Vertex(label2);
-        adjVertices.get(vertex1).add(vertex2);
-        adjVertices.get(vertex2).add(vertex1);
+        getAdjVertices(label1).add(vertex2);
+        getAdjVertices(label2).add(vertex1);
     }
 
     public void removeEdge(String label1, String label2){
@@ -45,5 +45,9 @@ public class Graph {
             adjVertices.remove(v2);
         if (ev2 != null)
             adjVertices.remove(v1);
+    }
+
+    List<Vertex> getAdjVertices(String label) {
+        return adjVertices.get(new Vertex(label));
     }
 }
