@@ -1,13 +1,16 @@
 package com.techie.leetcode;
 
+import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class Driver {
     public static  void main(String[] args){
         Random random = new Random();
+        System.out.println("B".compareTo("b"));
         System.out.println(Arrays.toString(random.moveZeroes(new int[]{0,9,0,6,0,7,0,8,0,3})));
         System.out.println(random.containsDuplicate2(new int[]{1,2,3,4,5,1}));
 
