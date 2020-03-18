@@ -4,6 +4,17 @@ import java.util.*;
 
 public class Driver {
     public static void main(String[] args){
+        Graph2 graph2 = new Graph2(5);
+        graph2.addEdge(graph2, 0, 1);
+        graph2.addEdge(graph2, 0, 4);
+        graph2.addEdge(graph2, 1, 2);
+        graph2.addEdge(graph2, 1, 3);
+        graph2.addEdge(graph2, 1, 4);
+        graph2.addEdge(graph2, 2, 3);
+        graph2.addEdge(graph2, 3, 4);
+
+        graph2.printGraph(graph2);
+
         Graph graph = new Graph();
         graph.addVertex("Bob");
         graph.addVertex("Alice");
