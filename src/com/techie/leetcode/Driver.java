@@ -10,6 +10,9 @@ import java.util.List;
 public class Driver {
     public static  void main(String[] args){
         Random random = new Random();
+
+        System.out.println(random.factorial(3));
+
         System.out.println("B".compareTo("b"));
         System.out.println(Arrays.toString(random.moveZeroes(new int[]{0,9,0,6,0,7,0,8,0,3})));
         System.out.println(random.containsDuplicate2(new int[]{1,2,3,4,5,1}));

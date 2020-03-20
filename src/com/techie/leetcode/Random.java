@@ -1,6 +1,5 @@
 package com.techie.leetcode;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class Random {
@@ -154,8 +153,50 @@ public class Random {
     int minimumDays(int rows, int columns, List<List<Integer> > grid)
     {
         List<List<Integer>> temp = new ArrayList<List<Integer>>();
-
-
         return -1;
+    }
+
+    public void reorderList(ListNode head) {
+        if(head == null)return;
+        ListNode tail = reorderList(head,getListLength(head));
+        System.out.println(tail);
+    }
+
+    private ListNode reorderList(ListNode head,int size){
+        if(size == 0)return null;
+        if(size == 1)return head;
+        if(size == 2)return head.next;
+        ListNode tail = reorderList(head.next,size-2);
+        ListNode temp = tail.next;
+        tail.next = tail.next.next;
+        temp.next = head.next;
+        head.next = temp;
+        return tail;
+    }
+
+    private int getListLength(ListNode head){
+        int size=0;
+        while(head != null){
+            size++;
+            head = head.next;
+        }
+        return size;
+    }
+
+    public int factorial(int n){
+        int fact = 1;
+        if (n <= 1)
+            return 1;
+        while (n > 1){
+            fact += fact * (n - 1);
+            n--;
+        }
+        return fact;
+    }
+
+    public int factorial2(int n){
+        if (n <= 1)
+            return 1;
+        return n * factorial(n - 1);
     }
 }
