@@ -1,5 +1,6 @@
 package com.techie.leetcode;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Random {
@@ -185,8 +186,10 @@ public class Random {
 
     public int factorial(int n){
         int fact = 1;
-        if (n <= 1)
+        if (n == 1)
             return 1;
+        if (n == 0)
+            return  -1;
         while (n > 1){
             fact += fact * (n - 1);
             n--;
@@ -195,8 +198,55 @@ public class Random {
     }
 
     public int factorial2(int n){
-        if (n <= 1)
+        if (n == 1)
             return 1;
+        if (n == 0)
+            return  -1;
         return n * factorial(n - 1);
+    }
+
+    public HashMap permutation(String shorter, String longer){
+        HashMap hm = new HashMap();
+        char first = shorter.charAt(0);
+        for (int i = 0; i < longer.length(); i++){
+            char compare = longer.charAt(i);
+            if (first == compare){
+                if (getWindowFrom(i, longer).equals(shorter)){
+                    hm.put(i, populate(i));
+                }
+            }
+        }
+        return hm;
+    }
+
+    private String getWindowFrom(int i, String longer) {
+        String perm = "";
+        int limit = i + 4;
+        for (int j = i; j < limit && limit <= longer.length(); j++){
+            perm += longer.charAt(j);
+        }
+        return perm;
+    }
+
+    private List<Integer> populate(int i) {
+        List<Integer> list = new ArrayList<>();
+        for (int j = i; j < i + 4; j++){
+            list.add(j);
+        }
+        return list;
+    }
+
+    public HashMap permutation2(String shorter, String longer){
+        HashMap list = new HashMap();
+        for (int i = 0; i < longer.length(); i++){
+            String compare = "";
+            int limit = i + 4;
+            for (int j = i; j < limit && limit <= longer.length(); j++){
+                compare += longer.charAt(j);
+            }
+            if (compare.equals(shorter))
+                list.put(i, compare);
+        }
+        return list;
     }
 }
