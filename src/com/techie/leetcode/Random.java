@@ -211,26 +211,26 @@ public class Random {
         for (int i = 0; i < longer.length(); i++){
             char compare = longer.charAt(i);
             if (first == compare){
-                if (getWindowFrom(i, longer).equals(shorter)){
-                    hm.put(i, populate(i));
+                if (getWindowFrom(i, longer, shorter.length()).equals(shorter)){
+                    hm.put(i, populate(i, shorter.length()));
                 }
             }
         }
         return hm;
     }
 
-    private String getWindowFrom(int i, String longer) {
+    private String getWindowFrom(int i, String longer, int lenShorter) {
         String perm = "";
-        int limit = i + 4;
+        int limit = i + lenShorter;
         for (int j = i; j < limit && limit <= longer.length(); j++){
             perm += longer.charAt(j);
         }
         return perm;
     }
 
-    private List<Integer> populate(int i) {
+    private List<Integer> populate(int i, int lenShorter) {
         List<Integer> list = new ArrayList<>();
-        for (int j = i; j < i + 4; j++){
+        for (int j = i; j < i + lenShorter; j++){
             list.add(j);
         }
         return list;
@@ -240,7 +240,7 @@ public class Random {
         HashMap list = new HashMap();
         for (int i = 0; i < longer.length(); i++){
             String compare = "";
-            int limit = i + 4;
+            int limit = i + shorter.length();
             for (int j = i; j < limit && limit <= longer.length(); j++){
                 compare += longer.charAt(j);
             }
