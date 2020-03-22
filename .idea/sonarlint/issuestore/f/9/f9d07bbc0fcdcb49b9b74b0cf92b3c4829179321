@@ -1,0 +1,14 @@
+
+\
+java:S1192"FDefine a constant instead of duplicating this literal "Alice" 4 times.(¢ö‹þ
+h	java:S1007"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(œ‡ê øÿÿÿÿ
+a
+java:S1192"FDefine a constant instead of duplicating this literal "Maria" 3 times.(¬¡§‘ûÿÿÿÿ
+o
+java:S22939"YReplace the type specification in this constructor call with the diamond operator ("<>").(œíï€
+c	java:S100&"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(à¡…Æ
+N	java:S106#"9Replace this use of System.out or System.err by a logger.(Òà´Ç
+C
+java:S11447"(Remove this unused private "BFS" method.(œ‡ê øÿÿÿÿ
+k
+java:S1149("PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(ƒÿƒ—ùÿÿÿÿ

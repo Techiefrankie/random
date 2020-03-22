@@ -1,0 +1,16 @@
+
+R
+java:S1128"=Remove this unused import 'java.beans.PropertyChangeSupport'.(ë¥³0
+S	java:S106"9Replace this use of System.out or System.err by a logger.(¨¼¦úÿÿÿÿ
+U	java:S106"9Replace this use of System.out or System.err by a logger.(Ş¢Õå8£ø¨½.
+N	java:S106"9Replace this use of System.out or System.err by a logger.(»íàğ
+G
+java:S1128"1Remove this unused import 'java.util.Comparator'.(î¹ó¹
+P
+java:S1854":Remove this useless assignment to local variable "result".(’ïÔñ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(Ú‘òÓøÿÿÿÿ
+J
+java:S1128"4Remove this unused import 'java.lang.reflect.Array'.(‡¡É˜
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ıËÜ®
+A
+java:S1481"+Remove this unused "result" local variable.(’ïÔñ

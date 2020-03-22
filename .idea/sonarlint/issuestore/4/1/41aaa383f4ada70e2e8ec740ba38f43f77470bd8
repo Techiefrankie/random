@@ -1,0 +1,32 @@
+
+R
+java:S1066Ö"/Merge this if statement with the enclosing one.(Ã°ì¸úÿÿÿÿ8¿üšò.
+Q
+java:S1128"4Remove this unused import 'java.lang.reflect.Array'.(‡¡É˜8”‡É¾.
+<
+java:S11722"&Remove these unused method parameters.(ÉÏã
+E
+java:S1172V"*Remove this unused method parameter "num".(‚ßŸÊÿÿÿÿÿ
+?
+java:S1643â"Use a StringBuilder instead.(Ü§œËşÿÿÿÿ8¿üšò.
+
+java:S1319ï"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(…¦·‹şÿÿÿÿ8¿üšò.
+†
+java:S13192"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(ÉÏã
+p
+java:S2293œ"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ü¹œ´
+p
+java:S3012•"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.( »ÉÆ
+t
+java:S3012r"YUse "Arrays.copyOf", "Arrays.asList", "Collections.addAll" or "System.arraycopy" instead.(©€ñÆÿÿÿÿÿ
+[	java:S106£"9Replace this use of System.out or System.err by a logger.(şÇù‡úÿÿÿÿ8³ã”™.
+B
+java:S1172š"&Remove these unused method parameters.(È±ŸÆúÿÿÿÿ
+O
+java:S1854œ"8Remove this useless assignment to local variable "temp".(Ü¹œ´
+@
+java:S1481œ")Remove this unused "temp" local variable.(Ü¹œ´
+:
+java:S1643õ"Use a StringBuilder instead.(¬ŠØØ8¿üšò.
+‹
+java:S1319Ğ"mThe return type of this method should be an interface such as "Map" rather than the implementation "HashMap".(ŸÉÛ×8¿üšò.

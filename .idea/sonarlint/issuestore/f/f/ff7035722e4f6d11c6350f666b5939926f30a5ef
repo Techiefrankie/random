@@ -1,0 +1,11 @@
+
+S
+java:S1751"6Remove this "return" statement or make it conditional.(àÓ×ã8şÛĞ.
+U
+java:S1854"8Remove this useless assignment to local variable "size".(ÓµÓ¬8·÷ÛĞ.
+M
+java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8Ğ›–ò.
+P
+java:S1128".Remove this unused import 'java.util.HashMap'.(™˜”€ùÿÿÿÿ8Ğ›–ò.
+M
+java:S1128"0Remove this unused import 'java.util.ArrayList'.(÷‰îƒ8Ğ›–ò.
