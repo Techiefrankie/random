@@ -260,5 +260,26 @@ public class Random {
         return true;
     }
 
+    public String runLengthCompression(String str){
+        StringBuilder sb = new StringBuilder();
+        if (str == null || str.length() == 0)
+            return "";
+        int count = 0;
+        char temp = str.charAt(0);
 
+        for (int i = 0; i < str.length(); i++){
+            char index = str.charAt(i);
+            if (temp == index){
+                count++;
+            }
+            else {
+                sb.append(count + "" + temp);
+                count = 1;
+            }
+            temp = index;
+        }
+        //append the last char
+        sb.append(count + "" + temp);
+        return sb.toString();
+    }
 }
