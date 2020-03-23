@@ -2,14 +2,18 @@ package com.techie.leetcode;
 
 import java.beans.PropertyChangeSupport;
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Driver {
     public static  void main(String[] args){
+
         Random random = new Random();
+
+        Permutation permutation = new Permutation();
+        System.out.println(permutation.permute(new int[]{1,2,3}));
+
+        System.out.println(random.add(3,5));
 
         System.out.println(random.runLengthCompression("aabccccdeeeaajk"));
 
@@ -29,6 +33,7 @@ public class Driver {
 
         List<Integer> result = new ArrayList<>();
         System.out.println(random.popularNToys(numToys,topToys,toys,numQuotes,quotes));
+
     }
 }
 
