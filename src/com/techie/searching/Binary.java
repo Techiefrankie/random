@@ -6,52 +6,34 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Binary {
-    public int iterativeSearch(int arr[], int x)
+    public int iterativeSearch(int arr[], int item)
     {
-        int l = 0, r = arr.length - 1;
-        while (l <= r) {
-            int m = l + (r - l) / 2;
+        int low = arr[0], high = arr[arr.length - 1];
 
-            // Check if x is present at mid
-            if (arr[m] == x)
-                return m;
+        while (low <= high){
 
-            // If x greater, ignore left half
-            if (arr[m] < x)
-                l = m + 1;
+            int mid = (low + high)/2;
+            if (arr[mid] == item)
+                return mid;
 
-                // If x is smaller, ignore right half
-            else
-                r = m - 1;
+            low = item > mid ? mid + 1 : low;
+            high = item < mid ? mid - 1 : high;
         }
-
-        // if we reach here, then element was
-        // not present
         return -1;
     }
 
-    int recursiveSearch(int arr[], int l, int r, int x)
+    int recursiveSearch(int arr[], int low, int high, int item)
     {
-        if (r >= l) {
-            int mid = l + (r - l) / 2;
-
-            // If the element is present at the
-            // middle itself
-            if (arr[mid] == x)
+        if (low <= high){
+            int mid = (low + high)/2;
+            if (arr[mid] == item)
                 return mid;
 
-            // If element is smaller than mid, then
-            // it can only be present in left subarray
-            if (arr[mid] > x)
-                return recursiveSearch(arr, l, mid - 1, x);
+            low = item > mid ? mid + 1 : low;
+            high = item < mid ? mid - 1 : high;
 
-            // Else the element can only be present
-            // in right subarray
-            return recursiveSearch(arr, mid + 1, r, x);
+            return recursiveSearch(arr, low, high, item);
         }
-
-        // We reach here when element is not present
-        // in array
         return -1;
     }
 }

@@ -11,6 +11,9 @@ public class Driver {
         Random random = new Random();
 
         Permutation permutation = new Permutation();
+
+        System.out.println(random.countStrings(5));
+
         System.out.println(permutation.permute(new int[]{1,2,3}));
 
         System.out.println(random.add(3,5));
