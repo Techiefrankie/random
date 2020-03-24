@@ -159,15 +159,17 @@ public class Random {
 
     public void reorderList(ListNode head) {
         if(head == null)return;
-        ListNode tail = reorderList(head,getListLength(head));
+        ListNode tail = reorderList(head, getListLength(head));
         System.out.println(tail);
     }
 
-    private ListNode reorderList(ListNode head,int size){
+    private ListNode reorderList(ListNode head, int size){
         if(size == 0)return null;
         if(size == 1)return head;
         if(size == 2)return head.next;
-        ListNode tail = reorderList(head.next,size-2);
+
+        ListNode tail = reorderList(head.next,size - 2);
+        //swap nodes
         ListNode temp = tail.next;
         tail.next = tail.next.next;
         temp.next = head.next;

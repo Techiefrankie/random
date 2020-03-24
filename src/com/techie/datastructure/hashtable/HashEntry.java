@@ -1,4 +1,4 @@
-package com.techie.datastructure.hashTable;
+package com.techie.datastructure.hashtable;
 
 public class HashEntry<K,V> {
     private K key;

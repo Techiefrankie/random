@@ -1,4 +1,4 @@
-package com.techie.datastructure.hashTable;
+package com.techie.datastructure.hashtable;
 
 public class BasicHash<K, V> {
     private HashEntry[] data;
@@ -54,9 +54,7 @@ public class BasicHash<K, V> {
 
     public  boolean hasKey(K key){
         int hash = calculateHash(key);
-        if (data[hash].getKey() == key)
-            return  true;
-        return  false;
+        return data[hash].getKey() == key;
     }
 
     public  boolean hasValue(V value){
