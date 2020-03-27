@@ -275,13 +275,13 @@ public class Random {
                 count++;
             }
             else {
-                sb.append(count + "" + temp);
+                sb.append(count).append(temp);
                 count = 1;
             }
             temp = index;
         }
         //append the last char
-        sb.append(count + "" + temp);
+        sb.append(count).append(temp);
         return sb.toString();
     }
 

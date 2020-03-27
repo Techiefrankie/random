@@ -16,10 +16,10 @@ class MergeSort
         int R[] = new int [n2];
 
         /*Copy data to temp arrays*/
-        for (int i=0; i<n1; ++i)
+        for (int i = 0; i < n1; ++i)
             L[i] = arr[l + i];
-        for (int j=0; j<n2; ++j)
-            R[j] = arr[m + 1+ j];
+        for (int j = 0; j < n2; ++j)
+            R[j] = arr[m + 1 + j];
 
 
         /* Merge the temp arrays */
@@ -68,11 +68,11 @@ class MergeSort
         if (l < r)
         {
             // Find the middle point
-            int m = (l+r)/2;
+            int m = (l + r) / 2;
 
             // Sort first and second halves
             sort(arr, l, m);
-            sort(arr , m+1, r);
+            sort(arr , m + 1, r);
 
             // Merge the sorted halves
             merge(arr, l, m, r);
