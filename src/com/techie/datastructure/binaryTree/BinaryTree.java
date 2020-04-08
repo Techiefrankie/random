@@ -1,5 +1,7 @@
 package com.techie.datastructure.binaryTree;
 
+import com.techie.datastructure.queue.Queue;
+
 public class BinaryTree<T extends Comparable<T>> {
 
     static class Node<T extends Comparable<T>>{
@@ -89,5 +91,22 @@ public class BinaryTree<T extends Comparable<T>> {
                 insert(child, parent.right);
             }
         }
+    }
+
+    void bfs(Node root){
+
+    }
+
+    public static void main(String[] arg){
+        Node<Integer> root = new Node(5);
+        Node<Integer> a = new Node(5);
+        Node<Integer> b = new Node(5);
+        Node<Integer> c = new Node(5);
+        Node<Integer> d = new Node(5);
+        BinaryTree<Integer> tree = new BinaryTree<>(root);
+        tree.add(a);
+        tree.add(b);
+        tree.add(c);
+        tree.add(d);
     }
 }

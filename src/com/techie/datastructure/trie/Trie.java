@@ -2,7 +2,7 @@ package com.techie.datastructure.trie;
 
 import java.util.HashMap;
 
-class Tries {
+class Trie {
     class TrieNode {
         HashMap<Character, TrieNode> children;
         boolean eof;
@@ -15,7 +15,7 @@ class Tries {
 
     TrieNode root;
 
-    public Tries() {
+    public Trie() {
         this.root = new TrieNode();
     }
 
@@ -70,7 +70,7 @@ class Tries {
 
 
     public static void main(String[] args) {
-        Tries trie = new Tries();
+        Trie trie = new Trie();
         trie.add("Techiefrankie");
         trie.print();
         trie.add("eiknarfeihceT");
