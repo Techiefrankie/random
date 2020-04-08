@@ -109,6 +109,35 @@ public class BTree {
         System.out.println("\nMax sum path: " + Collections.max(visited));
     }
 
+    // Iterative method for depth first search
+    public void dfs(Node root){
+        if(root == null)
+            return;
+
+        Stack<Node> stack = new Stack<>();
+        Set<Integer> visited = new LinkedHashSet<>();
+
+        Node previous = root, next = null;
+        stack.add(root);
+
+        while(!stack.isEmpty()){
+            Node node = stack.pop();
+            previous = node;
+
+            if(node.left != null){
+                stack.add(node.left);
+                next = node.left;
+            }
+            if(node.right != null){
+                stack.add(node.right);
+                next = node.right;
+            }
+            visited.add(previous.data + next.data);
+            System.out.print(node.data + " ");
+        }
+        System.out.println("\nMax sum path: " + Collections.max(visited));
+    }
+
     public static void main(String[] args) {
         BTree bst = new BTree();
         bst.insert(50);
@@ -128,6 +157,8 @@ public class BTree {
         System.out.println("");
         System.out.println("Level order traversal iterative");
         bst.bfs(bst.root);
+        System.out.println("Depth first search iterative");
+        bst.dfs(bst.root);
         System.out.println("");
     }
 }
