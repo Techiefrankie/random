@@ -66,7 +66,7 @@ public class BasicHash<K, V> {
     }
 
     private int calculateHash(K key){
-        int hash = key.hashCode() % this.capacity;
+        int hash = Math.abs(key.hashCode() % this.capacity);
         //this is necessary to avoid collision
         while (data[hash] != null && !data[hash].getKey().equals(key)){
             hash = (hash  + 1) % this.capacity;

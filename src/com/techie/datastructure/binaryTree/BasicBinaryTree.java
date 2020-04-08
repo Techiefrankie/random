@@ -30,7 +30,7 @@ public class BasicBinaryTree<T extends Comparable<T>> {
                 size++;
             }
             else {
-                insert(parent,child);
+                insert(parent, child);
             }
         }
         else if (child.getItem().compareTo(parent.getItem()) > 0){

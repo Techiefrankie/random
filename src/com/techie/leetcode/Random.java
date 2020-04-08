@@ -54,7 +54,7 @@ public class Random {
         Map<String, Integer> result = getToysFromQuotes(toys, quotes);
         int i = 0;
 
-        List<Map.Entry<String, Integer>> entryList= new ArrayList<>(result.entrySet());
+        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(result.entrySet());
 
         Collections.sort(entryList, (a, b) -> (b.getValue() - a.getValue()) != 0 ? (b.getValue() - a.getValue()) : a.getKey().compareTo(b.getKey()));
         while (i < entryList.size() && topToys > 0) {

@@ -2,52 +2,210 @@ package com.techie.datastructure.graph.adjacencylist;
 
 import java.util.*;
 
-public class Graph {
-    private Map<Vertex, List<Vertex>> adjVertices;
+public class Graph<T>{
+
+    static class Vertex<T>{
+        private T data;
+        private double weight;
+
+        public Vertex(T data) {
+            this.data = data;
+        }
+
+        public double getWeight() {
+            return weight;
+        }
+
+        public void setWeight(double weight) {
+            this.weight = weight;
+        }
+
+        public void setData(T data) {
+            this.data = data;
+        }
+
+        public T getData() {
+            return data;
+        }
+    }
+
+    HashMap<Vertex, List<Vertex>> adjVertexHMap;
 
     public Graph() {
-        this.adjVertices = new HashMap<Vertex, List<Vertex>>();
+        this.adjVertexHMap = new HashMap<>();
     }
 
-    public Map<Vertex, List<Vertex>> getAdjVertices() {
-        return adjVertices;
+    void addVertex(Vertex vertex){
+        //add a new adjacency vertex in the hash table and set value to an arraylist
+        this.adjVertexHMap.putIfAbsent(vertex, new ArrayList<>());
     }
 
-    public void setAdjVertices(Map<Vertex, List<Vertex>> adjVertices) {
-        this.adjVertices = adjVertices;
+    void removeVertex(Vertex vertex){
+        //get this adjacency vertex from the graph
+        List<Vertex> vertexList = this.adjVertexHMap.get(vertex);
+        //remove any value in the vertex
+        this.adjVertexHMap.values().stream().forEach(e -> e.remove(vertex));
+        //remove the vertex
+        this.adjVertexHMap.remove(vertex);
     }
 
-    public  void addVertex(String label){
-        adjVertices.putIfAbsent(new Vertex(label), new ArrayList<>());
+    void addEdge(Vertex v1, Vertex v2){
+        this.adjVertexHMap.get(v1).add(v2);
+        this.adjVertexHMap.get(v2).add(v1);
     }
 
-    public void removeVertex(String label){
-        Vertex vertex = new Vertex(label);
-        adjVertices.values().stream().forEach(e -> e.remove(vertex));
-        adjVertices.remove(new Vertex(label));
+    void removeEdge(Vertex v1, Vertex v2){
+        this.adjVertexHMap.get(v1).remove(v2);
+        this.adjVertexHMap.get(v2).remove(v1);
     }
 
-    public void addEdge(String label1, String label2){
-        Vertex vertex1 = new Vertex(label1);
-        Vertex vertex2 = new Vertex(label2);
-        getAdjVertices(label1).add(vertex2);
-        getAdjVertices(label2).add(vertex1);
+    List<Vertex> getAdjVertices(Vertex vertex){
+        return this.adjVertexHMap.get(vertex);
     }
 
-    public void removeEdge(String label1, String label2){
-        Vertex v1 = new Vertex(label1);
-        Vertex v2 = new Vertex(label2);
+    Set<T> BFS(Vertex root){
+        //create a set to hold unique visited nodes
+        Set<T> visited = new LinkedHashSet<>();
+        //a queue to gold adjacent vertices to be explored
+        Queue<Vertex> queue = new LinkedList<>();
+        queue.add(root);
 
-        List<Vertex> ev1 = adjVertices.get(v1);
-        List<Vertex> ev2 = adjVertices.get(v2);
-
-        if (ev1 != null)
-            adjVertices.remove(v2);
-        if (ev2 != null)
-            adjVertices.remove(v1);
+        while (!queue.isEmpty()){
+            //get the item at the front of the queue
+            Vertex vertex = queue.poll();
+            //if this node has not been visited previously, visit it
+            if (!visited.contains(vertex.data)){
+                visited.add((T) vertex.data);
+                //explore the node
+                for (Vertex v : getAdjVertices(vertex)){
+                    queue.add(v);
+                }
+            }
+        }
+        return visited;
     }
 
-    List<Vertex> getAdjVertices(String label) {
-        return adjVertices.get(new Vertex(label));
+    Set<T> DFS(Vertex root){
+        //set to hold unique visited nodes
+        Set<T> visited = new LinkedHashSet<>();
+        //stack to hold adjacent nodes to be visited
+        Stack<Vertex> stack = new Stack<>();
+        stack.push(root);
+
+        while (!stack.empty()){
+            Vertex vertex = stack.pop();
+            if (!visited.contains(vertex.data)){
+                visited.add((T) vertex.data);
+                for (Vertex v : getAdjVertices(vertex)){
+                    stack.push(v);
+                }
+            }
+        }
+        return visited;
+    }
+
+    int maximumPathSum(Vertex root){
+        //implementation using DFS
+        //set to hold unique visited nodes
+        Set<T> visited = new LinkedHashSet<>();
+        //stack to hold adjacent nodes to be visited
+        Stack<Vertex> stack = new Stack<>();
+        stack.push(root);
+        Vertex previous = root;
+        Vertex next = null;
+        Set<Integer> result = new LinkedHashSet<>();
+
+        while (!stack.empty()){
+            Vertex vertex = stack.pop();
+            previous = vertex;
+            if (!visited.contains(vertex.data)){
+                visited.add((T) vertex.data);
+                for (Vertex v : this.adjVertexHMap.get(vertex)){
+                    stack.push(v);
+                    next = v;
+                    result.add((int)previous.data + (int)next.data);
+                }
+            }
+        }
+
+        return Collections.max(result);
+    }
+
+    void print(){
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Map.Entry<Vertex, List<Vertex>>> entries = new ArrayList<>(this.adjVertexHMap.entrySet());
+
+        for (int i = 0; i < entries.size(); i++){
+            Map.Entry<Vertex, List<Vertex>> vertexEdges = entries.get(i);
+            List<Vertex> list = vertexEdges.getValue();
+            T head = (T) entries.get(i).getKey().data;
+
+            sb.append(head + " -> ");
+            int size = list.size();
+            for (Vertex vertex : list){
+
+                if (size > 0){
+                    sb.append(head);
+                    sb.append("-");
+                    sb.append(vertex.data);
+
+                    size--;
+                    if (size > 0)
+                        sb.append(", ");
+                }
+            }
+            sb.append(System.lineSeparator());
+        }
+        System.out.println(sb.toString());
+    }
+
+    void print(Set<T> visited){
+        //print to console the traversal path
+        StringBuilder sb = new StringBuilder();
+        int size = visited.size();
+        for (T node : visited){
+            sb.append(node);
+            size--;
+            if (size > 0)
+                sb.append(" -> ");
+        }
+        System.out.println(sb.toString());
+    }
+
+    public static void main(String[] arg){
+        Graph<String> graph = new Graph<>();
+        Vertex A = new Vertex<>("A");
+        Vertex B = new Vertex<>("B");
+        Vertex C = new Vertex<>("C");
+        Vertex D = new Vertex<>("D");
+        Vertex E = new Vertex<>("E");
+
+        graph.addVertex(A);
+        graph.addVertex(B);
+        graph.addVertex(C);
+        graph.addVertex(D);
+        graph.addVertex(E);
+
+        graph.addEdge(A, B);
+        graph.addEdge(A, C);
+        graph.addEdge(A, D);
+        graph.addEdge(B, D);
+        graph.addEdge(D, E);
+        graph.addEdge(C, E);
+        graph.print();
+
+        graph.print(graph.BFS(A));
+        graph.print(graph.DFS(A));
+        graph.print(graph.BFS(B));
+        graph.print(graph.DFS(B));
+
+        System.out.println(System.lineSeparator());
+
+        graph.removeVertex(C);
+        graph.print();
+
+        graph.removeEdge(A, B);
+        graph.print();
+
     }
 }

@@ -1,50 +1,89 @@
 package com.techie.datastructure.graph.adjmatrix;
 
-public class Graph {
-    private boolean[][] adjMatrix;
-    private int numVertices;
+import java.util.ArrayList;
+
+public class Graph<T> {
+
+    static class Vertex<T> {
+        T data;
+        double weight;
+
+        public Vertex(T data) {
+            this.data = data;
+        }
+    }
+
+    boolean[][] adjMatrix;
+    int numVertices;
+    ArrayList<Vertex> vertices;
 
     public Graph(int numVertices) {
         this.numVertices = numVertices;
         adjMatrix = new boolean[numVertices][numVertices];
+        vertices = new ArrayList<>();
     }
 
-    public void addEdge(int i, int j) {
-        adjMatrix[i][j] = true;
-        adjMatrix[j][i] = true;
+    void addVertex(Vertex vertex){
+        vertices.add(vertex);
     }
 
-    public void removeEdge(int i, int j) {
-        adjMatrix[i][j] = false;
-        adjMatrix[j][i] = false;
+    void removeVertex(Vertex vertex){
+        vertices.remove(vertex);
     }
 
-    public boolean isEdge(int i, int j) {
-        return adjMatrix[i][j];
+    void addEdge(Vertex v1, Vertex v2){
+        adjMatrix[vertices.indexOf(v1)][vertices.indexOf(v2)] = true;
+        adjMatrix[vertices.indexOf(v2)][vertices.indexOf(v1)] = true;
     }
 
-    public String toString() {
+    void removeEdge(Vertex v1, Vertex v2){
+        adjMatrix[vertices.indexOf(v1)][vertices.indexOf(v2)] = false;
+        adjMatrix[vertices.indexOf(v2)][vertices.indexOf(v1)] = false;
+    }
+
+    boolean isEdge(Vertex v1, Vertex v2){
+        return adjMatrix[vertices.indexOf(v1)][vertices.indexOf(v2)];
+    }
+
+    public void print() {
         StringBuilder sb = new StringBuilder();
+        sb.append("   ");
+        for (Vertex vertex : vertices){
+            sb.append(vertex.data).append(" ");
+        }
+        sb.append(System.lineSeparator());
+
         for (int i = 0; i < numVertices; i++) {
-            sb.append(i + ": ");
+            sb.append(vertices.get(i).data + "  ");
             for (boolean j : adjMatrix[i]) {
                 sb.append((j ? 1 : 0)+ " ");
             }
             sb.append(System.lineSeparator());
         }
-        return sb.toString();
+        System.out.println(sb.toString());
     }
 
-    public static void main(String[] args)
-    {
-        Graph g = new Graph(4);
+    public static void main(String[] arg){
+        Graph<String> graph = new Graph(5);
+        Vertex A = new Vertex<>("A");
+        Vertex B = new Vertex<>("B");
+        Vertex C = new Vertex<>("C");
+        Vertex D = new Vertex<>("D");
+        Vertex E = new Vertex<>("E");
 
-        g.addEdge(0, 1);
-        g.addEdge(0, 2);
-        g.addEdge(1, 2);
-        g.addEdge(2, 0);
-        g.addEdge(2, 3);
-        System.out.print(g.toString());
-        System.out.println("\nIs edge [0][1]: " + g.isEdge(0,1));
+        graph.addVertex(A);
+        graph.addVertex(B);
+        graph.addVertex(C);
+        graph.addVertex(D);
+        graph.addVertex(E);
+
+        graph.addEdge(A, B);
+        graph.addEdge(A, C);
+        graph.addEdge(A, D);
+        graph.addEdge(B, D);
+        graph.addEdge(D, E);
+        graph.addEdge(C, E);
+
+        graph.print();
     }
 }

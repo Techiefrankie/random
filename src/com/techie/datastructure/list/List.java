@@ -1,7 +1,7 @@
 package com.techie.datastructure.list;
 
-public class List<T> {
-    static class Node<T>{
+public class List<T extends Comparable<T>> {
+    static class Node<T extends Comparable<T>>{
         T data;
         Node nextNode;
 
@@ -65,10 +65,10 @@ public class List<T> {
     void insert(T item, int position){
         if (position > nodeCount || position < 0)
             return;
+        Node newNode = new Node(item);
         //inserting at position 0
         if (position == 0){
             //create new node with item and set to root and adjust previous root
-            Node newNode = new Node(item);
             //cache current root node
             Node temp = root;
             root = newNode;
@@ -86,8 +86,6 @@ public class List<T> {
             currentNode = currentNode.getNextNode();
             index++;
         }
-        //create a node ith this item
-        Node newNode = new Node(item);
         //insert the new node at this position
         previous.nextNode = newNode;
         newNode.nextNode = currentNode;
@@ -99,10 +97,12 @@ public class List<T> {
         Node currentNode = root, previousNode =  null, nextNode = null;
         if (currentNode == null)
             return false;
+        //deleting the current root node
         if (currentNode.data == item){
             nextNode = currentNode.nextNode;
             //set root count to next node
             root = nextNode;
+            currentNode = null;
             //reduce the count of nodes
             nodeCount--;
             return true;
@@ -122,6 +122,7 @@ public class List<T> {
                     nodeCount--;
                     return  true;
                 }
+                //increment index and swap nodes
                 index++;
                 previousNode = currentNode;
                 nextNode = currentNode.getNextNode();
@@ -144,6 +145,7 @@ public class List<T> {
     }
 
     void insertBefore(T before, T item){
+        //start at the root node and check for node that its data matches the item before
         int index = 0;
         Node currentNode = root;
         while (currentNode != null){
@@ -157,7 +159,7 @@ public class List<T> {
     }
 
     void insertAfter(T before, T item){
-        //start index at 1 to always be ahead of the current index
+        //start index at 1 to always be a node ahead of the current index
         int index = 1;
         Node currentNode = root;
         while (currentNode != null){
@@ -167,6 +169,54 @@ public class List<T> {
             }
             currentNode = currentNode.getNextNode();
             index++;
+        }
+    }
+
+    void removeDuplicates(){
+        //get hold of the root node
+        Node currentNode = this.root, previousNode = null, nextNode = null;
+        //loop through all the nodes in the list
+        while (currentNode != null){
+            //hold the current node and loop through the subsequent nodes, checking for duplicates
+            previousNode = currentNode;
+            nextNode = currentNode.nextNode;
+
+            while (nextNode != null){
+                if (currentNode.data == nextNode.data){
+                    previousNode.nextNode = nextNode.nextNode;
+                }
+                //update previous and next nodes
+                previousNode = nextNode;
+                nextNode = nextNode.nextNode;
+            }
+            //move to the next node in the sequence
+            currentNode = currentNode.nextNode;
+        }
+    }
+
+    void sort(){
+        //grab the root node
+        Node currentNode = root;
+        if (currentNode == null)
+            return;
+        //initialize previousNode and nextNode to null
+        Node previousNode = null, nextNode = null, temp = null;
+        //hold the current node and loop through subsequent nodes for any node with smaller data
+        while (currentNode != null){
+            previousNode = currentNode;
+            nextNode = currentNode.nextNode;
+              //check for any node with smaller data item and swap with current node
+            while (nextNode != null){
+                if (nextNode.data.compareTo(currentNode.data) < 0){
+                    temp = nextNode;
+                    previousNode.nextNode = nextNode;
+                      break;
+                }
+                //reset next node to current node
+                nextNode = nextNode.nextNode;
+            }
+            //advance current node pointer
+            currentNode = currentNode.nextNode;
         }
     }
 
@@ -184,34 +234,47 @@ public class List<T> {
 
     public static void main(String[] arg){
         List<Integer> list = new List<>();
-        list.add(1);
+//        list.add(1);
+//        list.add(2);
+//        list.add(3);
+//        list.add(8);
+//        list.add(9);
+//        list.add(11);
+//        list.printList();
+//        Node node = (List.Node) list.search(8);
+//        System.out.println(node.data);
+//        list.insert(4, 3);
+//        list.insert(    10, 6);
+//        list.printList();
+//        list.delete(11);
+//        list.printList();
+//        list.add(12);
+//        list.printList();
+//        list.insert(5, 4);
+//        list.insert(6, 5);
+//        list.insert(7, 6);
+//        list.insert(11, 10);
+//        list.printList();
+//        list.add(14);
+//        list.printList();
+//        list.insertBefore(14, 13);
+//        list.printList();
+//        list.insertAfter(14, 15);
+//        list.printList();
+//        list.insertBefore(1,0);
+//        list.printList();
+//        list.add(3);
+//        list.insert(10, 4);
+//        list.printList();
+//        list.removeDuplicates();
+//        list.printList();
+        list.add(4);
+        list.add(7);
         list.add(2);
-        list.add(3);
         list.add(8);
-        list.add(9);
-        list.add(11);
+        list.add(3);
         list.printList();
-        Node node = (List.Node) list.search(8);
-        System.out.println(node.data);
-        list.insert(4, 3);
-        list.insert(    10, 6);
-        list.printList();
-        list.delete(11);
-        list.printList();
-        list.add(12);
-        list.printList();
-        list.insert(5, 4);
-        list.insert(6, 5);
-        list.insert(7, 6);
-        list.insert(11, 10);
-        list.printList();
-        list.add(14);
-        list.printList();
-        list.insertBefore(14, 13);
-        list.printList();
-        list.insertAfter(14, 15);
-        list.printList();
-        list.insertBefore(1,0);
+        list.sort();
         list.printList();
     }
 }

@@ -2,9 +2,8 @@ package com.techie.datastructure.trie;
 
 import java.util.HashMap;
 
-public class Trie {
-
-    class TrieNode{
+class Tries {
+    class TrieNode {
         HashMap<Character, TrieNode> children;
         boolean eof;
 
@@ -16,47 +15,65 @@ public class Trie {
 
     TrieNode root;
 
-    public Trie() {
+    public Tries() {
         this.root = new TrieNode();
     }
 
-    public void insert(String word){
-        TrieNode current = this.root;
-        for (int i = 0; i < word.length(); i++){
-            char index = word.charAt(i);
-            TrieNode node = current.children.get(index);
-            if (node == null){
-                node = new TrieNode();
-                current.children.put(index, node);
+    void add(String word) {
+        //grab the root Trie node
+        TrieNode currentNode = root;
+        //loop through all the characters in the string to be added
+        for (char character : word.toCharArray()) {
+            //check if the current node already contains this character, else add this character to a new node
+            TrieNode node = currentNode.children.get(character);
+            TrieNode newNode = new TrieNode();
+            if (node == null) {
+                currentNode.children.putIfAbsent(character, newNode);
             }
-            current = node;
+            // update the current node to the new node
+            currentNode = newNode;
         }
-        current.eof = true;
+        //set eof to true at the end of the traversal
+        currentNode.eof = true;
     }
 
-    public boolean search(String word){
-        TrieNode current = root;
-        for (int i = 0; i < word.length(); i++){
-            char index = word.charAt(i);
-            TrieNode node = current.children.get(index);
-            if (node == null)
-                return false;
-            current = node;
+    boolean contains(String word) {
+        //grab the root node
+        TrieNode currentNode = root;
+        //loop through every character in the word to see if the eof flag of the last character is true
+        for (char character : word.toCharArray()) {
+            TrieNode node = currentNode.children.get(character);
+            if (node.eof == true)
+                return false;//no path for this word
+            currentNode = node; //to advance the loop
         }
-
-        return current.eof;
+        return currentNode.eof;//true if word exists, false otherwise
     }
 
-    public boolean startsWith(String prefix){
-        TrieNode current = this.root;
-
-        for (int i = 0; i < prefix.length(); i++){
-            char index = prefix.charAt(i);
-            TrieNode node = current.children.get(index);
-            if (node == null)
-                return false;
-            current = node;
+    void print() {
+        StringBuilder sb = new StringBuilder();
+        TrieNode currentNode = root;
+        TrieNode[] nodes = currentNode.children.entrySet().toArray(TrieNode[]::new);
+        for (TrieNode node : nodes) {
+            TrieNode node1 = node;
         }
-        return current.eof;
+
+        while (currentNode != null && !currentNode.eof) {
+            char character = currentNode.children.keySet().iterator().next();
+            sb.append(character);
+            currentNode = currentNode.children.get(character);
+            if (!currentNode.eof) sb
+                    .append(" -> ");
+        }
+        System.out.println(sb.toString());
+    }
+
+
+    public static void main(String[] args) {
+        Tries trie = new Tries();
+        trie.add("Techiefrankie");
+        trie.print();
+        trie.add("eiknarfeihceT");
+        trie.print();
     }
 }
