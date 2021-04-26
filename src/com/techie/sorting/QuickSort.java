@@ -8,7 +8,7 @@ class QuickSort
        smaller (smaller than pivot) to left of
        pivot and all greater elements to right
        of pivot */
-    int partition(int[] arr, int low, int high)
+    int getPartition(int[] arr, int low, int high)
     {
         int pivot = arr[high];
         int i = (low - 1); // index of smaller element
@@ -27,11 +27,12 @@ class QuickSort
         }
 
         // swap arr[i+1] and arr[high] (or pivot)
-        int temp = arr[i + 1];
-        arr[i + 1] = arr[high];
+        int pi = i + 1;
+        int temp = arr[pi];
+        arr[pi] = pivot;
         arr[high] = temp;
 
-        return i + 1;
+        return pi;
     }
 
 
@@ -45,7 +46,7 @@ class QuickSort
         {
             /* pi is partitioning index, arr[pi] is
               now at right place */
-            int pi = partition(arr, low, high);
+            int pi = getPartition(arr, low, high);
 
             // Recursively sort elements before
             // partition and after partition
