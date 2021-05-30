@@ -1,5 +1,7 @@
 package com.techie.datastructure.hashtable;
 
+import java.util.Arrays;
+
 public class HashTable<K, V> {
 
     class HashData<K, V>{

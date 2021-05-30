@@ -127,8 +127,8 @@ public class Graph<T>{
                 }
             }
         }
-
-        return Collections.max(result);
+        int size = result.size();
+        return Collections.min(result);
     }
 
     void print(){
