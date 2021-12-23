@@ -320,4 +320,19 @@ public class Random {
         // Subtract a[n-1]+b[n-1] from 2^n
         return (1 << n) - a[n - 1] - b[n - 1];
     }
+
+    public int lengthOfLongestSubstring(String s) {
+        String subStr = "";
+        char currentChar = s.charAt(0);
+        for (int i = 1; i < s.length(); i++){
+            char nextChar = s.charAt(i);
+            if (currentChar == nextChar){
+                subStr += currentChar;
+                break;
+            }
+            subStr += nextChar;
+            currentChar = nextChar;
+        }
+        return subStr.length();
+    }
 }

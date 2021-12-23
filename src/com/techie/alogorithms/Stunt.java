@@ -1,8 +1,10 @@
 package com.techie.alogorithms;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 public class Stunt {
     /*
@@ -67,4 +69,71 @@ public class Stunt {
 
         return String.valueOf(Arrays.stream(degrees).max().getAsInt());
     }
+
+    /**
+     * Amazon is building a way to help customers
+     * search reviews quicker by providing real-time
+     * suggestions to search terms when the customer
+     * starts typing. When given a minimum of two
+     * characters into the search field the system will
+     * suggest at most three keywords from the review
+     * word repository. As the customer continues to
+     * type in the reviews search bar thè relevant
+     * keyword suggestions will update automatically.
+     * Write an algorithm that will output a maximum of
+     * three keyword suggestions after each character is
+     * typed by the customer in the search field.
+     * If there are more than three acceptable keywords,
+     * return the keywords that are first in alphabetical
+     * order.
+     * Only return keyword suggestions after the
+     * customer has entered two characters.
+     * Keyword suggestions must start with the
+     * characters already typed
+     * Both the repository and the customerQuery
+     * should be compared in a case-insensitive way.
+     * @param repository
+     * @param customerQuery
+     * @return list
+     * Example
+     * Input:
+     * repository = [ "mobile", "mouse", "moneypot","monitor", "mousepad" ], customerQuery = "mouse"
+     * Output:
+     * ["mobile", "moneypot", "monitor"]
+     * ["mouse", "mousepad"]
+     * ["mouse", "mousepad"]
+     * ["mouse", "mousepad"]
+     */
+
+    public static List<List<String>> searchSuggestions(List<String> repository, String customerQuery) {
+    // Write your code here
+        List<List<String>> result = new ArrayList<>();
+        String search = "";
+
+            for (int i = 0; i < customerQuery.length(); i++) {
+                search = search.concat(String.valueOf(customerQuery.charAt(i)));
+
+                if (search.length() >= 2) {
+                    List<String> keywords = new ArrayList<>();
+                    for(String repString : repository) {
+
+                        if ( repString.toLowerCase().contains(search.toLowerCase())) {
+                            keywords.add(repString.toLowerCase());
+                        }
+                    }
+
+                    Collections.sort(keywords);
+                    if (!keywords.isEmpty() && keywords.size() > 3) {
+                        result.add(keywords.subList(0, 3));
+                    }
+                    else if (keywords.size() > 0) {
+                        result.add(keywords);
+                    }
+                }
+
+            }
+
+        return result;
+    }
+
 }

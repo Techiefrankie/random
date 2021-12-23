@@ -172,7 +172,26 @@ public class Graph<T>{
         System.out.println(sb.toString());
     }
 
+    public static int clip(String str){
+        ArrayList<String> result = new ArrayList(Collections.singleton(str.split("")));
+
+        for (int i = 0, j = str.length() - 1; i < str.length() && j >= 0; i++, j--){
+            char a = str.charAt(i);
+            char b = str.charAt(j);
+
+            if ((a == '0' && b == '1') || (a == '1' && b == '0')){
+                result.remove(a);
+                result.remove(b);
+            }
+        }
+
+        return result.size();
+    }
+
     public static void main(String[] arg){
+        String str = "000*111";
+        System.out.println(clip(str));
+
         Graph<String> graph = new Graph<>();
         Vertex A = new Vertex<>("A");
         Vertex B = new Vertex<>("B");

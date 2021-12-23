@@ -9,6 +9,7 @@ public class Driver {
     public static  void main(String[] args){
 
         Random random = new Random();
+        System.out.println(random.lengthOfLongestSubstring("abcabcbb"));
 
         Permutation permutation = new Permutation();
 

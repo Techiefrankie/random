@@ -67,7 +67,7 @@ public class ArrayRotation {
             for (int j = 0; j < encrytionValidity.length; j++){
                 if(encrytionValidity[i] % encrytionValidity[j] == 0){
                     //elements are divisible, increment count
-                    counter++;
+                    //counter++;
                 }
             }
         }
