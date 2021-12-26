@@ -10,6 +10,19 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) throws IOException {
+        List<List<String>> codeList1 = new ArrayList() {{
+            add(Arrays.asList("apple", "apple"));
+            add(Arrays.asList("banana", "anything", "banana"));
+        }};
+
+        // List<String> codeList = Arrays.asList("apple", "apple", "banana", "anything", "banana");
+        List<String> codeList = Arrays.asList("orange", "banana", "apple", "anything", "banana");
+
+        List<String> shoppingCart = Arrays.asList("orange", "apple", "apple", "banana", "orange", "banana",
+                "apple", "apple", "orange", "orange", "banana", "apple", "banana", "banana");
+
+        int score = Stunt.winsPromo(codeList, shoppingCart);
+
         List<String> repository = new ArrayList(Arrays.asList("mobile", "mouse", "moneypot","monitor", "mousepad"));
         String customerQuery = "mouse";
 
