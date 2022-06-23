@@ -6,34 +6,39 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Binary {
-    public int iterativeSearch(int arr[], int item)
-    {
-        int low = arr[0], high = arr[arr.length - 1];
 
-        while (low <= high){
+    public boolean iterativeBinSearch(int[] arr, int k) {
+        int low = 0;
+        int high = arr.length - 1;
 
-            int mid = (low + high)/2;
-            if (arr[mid] == item)
-                return mid;
+        while (low <= high) {
+            int mid = low + (( high - low) / 2);
 
-            low = item > mid ? mid + 1 : low;
-            high = item < mid ? mid - 1 : high;
+            if (arr[mid] == k) {
+                return true;
+            } else if (k > mid) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
         }
-        return -1;
+
+        return false;
     }
 
-    int recursiveSearch(int arr[], int low, int high, int item)
-    {
-        if (low <= high){
-            int mid = (low + high)/2;
-            if (arr[mid] == item)
-                return mid;
 
-            low = item > mid ? mid + 1 : low;
-            high = item < mid ? mid - 1 : high;
-
-            return recursiveSearch(arr, low, high, item);
+    public boolean recursiveSearch(int[] arr, int key, int left, int right){
+        if (left > right) {
+            return false;
         }
-        return -1;
+        int mid = left + ((right - left) / 2);
+
+        if (key == arr[mid]) {
+            return true;
+        } else if (key < arr[mid]) {
+            return recursiveSearch(arr, key, left, mid - 1);
+        } else {
+            return recursiveSearch(arr, key, mid + 1, right);
+        }
     }
 }
