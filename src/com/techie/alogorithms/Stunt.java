@@ -259,18 +259,38 @@ public class Stunt {
     }
 
     abstract class Node implements Comparable<Node> {
-    public  int frequency; // the frequency of this tree
-    public  char data;
-    public  Node left, right;
+        public  int frequency; // the frequency of this tree
+        public  char data;
+        public  Node left, right;
 
-    public Node(int freq) {
-      frequency = freq;
+        public Node(int freq) {
+          frequency = freq;
+        }
+
+        // compares on the frequency
+        public int compareTo(Node tree) {
+            return frequency - tree.frequency;
+        }
     }
 
-    // compares on the frequency
-    public int compareTo(Node tree) {
-        return frequency - tree.frequency;
+    public static int getMinString(String s){
+        List<String> result = new ArrayList<>();
+
+        for ( char c : s.toCharArray()) {
+            result.add(String.valueOf(c));
+        }
+
+        for (int i = 0; i < result.size(); i++) {
+            if ( (result.get(i).equals("0") && result.get(i++).equals("1")) ||
+                    (result.get(i).equals("1") && result.get(++i).equals("0"))
+            ) {
+                result.remove(i);
+                result.remove(++i);
+                i += 2;
+            }
+        }
+
+        return result.size() == s.length() ? 0 : result.size();
     }
-}
 
 }

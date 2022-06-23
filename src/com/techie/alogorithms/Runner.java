@@ -10,6 +10,9 @@ import java.util.List;
 
 public class Runner {
     public static void main(String[] args) throws IOException {
+        String str = "01010";
+        System.out.println(Stunt.getMinString(str));
+
         List<List<String>> codeList1 = new ArrayList() {{
             add(Arrays.asList("apple", "apple"));
             add(Arrays.asList("banana", "anything", "banana"));
