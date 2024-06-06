@@ -2,6 +2,7 @@ package com.techie.leetcode;
 
 import java.lang.reflect.Array;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Random {
     public int[] moveZeroes(int[] array){
@@ -334,5 +335,30 @@ public class Random {
             currentChar = nextChar;
         }
         return subStr.length();
+    }
+
+    public int lengthOfLongestSubstring2(String s) {
+        List<Integer> sums = new ArrayList<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            int total = 1;
+            char currentChar = s.charAt(i);
+
+            for (int j = i + 1; j < s.length(); j++) {
+                char nextChar = s.charAt(j);
+
+                if (currentChar == nextChar) {
+                    total = total + 1;
+                } else {
+                    break;
+                }
+            }
+
+            // add to
+            sums.add(total);
+            System.out.printf("Total length of substring beginning with %s is %d\n", s.charAt(i), total);
+        }
+
+        return Collections.max(sums);
     }
 }
