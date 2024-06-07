@@ -340,18 +340,16 @@ public class Random {
     public int lengthOfLongestSubstring2(String s) {
         List<Integer> sums = new ArrayList<>();
 
-        for (int i = 0; i < s.length(); i++) {
+        for (int i = 0; i < s.length() - 1; i++) {
             int total = 1;
+
             char currentChar = s.charAt(i);
+            char nextChar = s.charAt(i+1);
 
-            for (int j = i + 1; j < s.length(); j++) {
-                char nextChar = s.charAt(j);
-
-                if (currentChar == nextChar) {
-                    total = total + 1;
-                } else {
-                    break;
-                }
+            if (currentChar == nextChar) {
+                total = total + 1;
+            } else {
+                break;
             }
 
             // add to
