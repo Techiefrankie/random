@@ -22,7 +22,7 @@ public class WorkFall {
     }
 
 
-    static boolean findSum(int sum, int[] arr) {
+    static boolean findSum(int n, int sum, int[] arr) {
 
         if (arr.length == 0) {
             return  false;
@@ -33,7 +33,7 @@ public class WorkFall {
         for(int i = 0; i < arr.length;) {
             int counter = 0;
 
-            for (int j = i; j < arr.length && counter < 5; j++) {
+            for (int j = i; j < arr.length && counter < n; j++) {
                 total = total + arr[j];
                 counter++;
             }
@@ -49,8 +49,8 @@ public class WorkFall {
         return false;
     }
 
-    public static boolean hasCombination(int[] array, int sum) {
-        return hasCombination(array, sum, 0, 5);
+    public static boolean hasCombination(int[] array, int sum, int n) {
+        return hasCombination(array, sum, 0, n);
     }
 
     private static boolean hasCombination(int[] array, int sum, int startIndex, int itemCount) {

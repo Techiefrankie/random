@@ -7,8 +7,9 @@ import java.util.List;
 
 public class SmallestPrimeSum {
     public static void main(String[] args) {
-        int n = 27;
-        System.out.println("The final smallest sum of prime factors is: " + getSmallestPrimeFactors(n));
+        int n = 16;
+        System.out.println(getSmallestPrimeFactors(n));
+        //System.out.println("The final smallest sum of prime factors is: " + getSmallestPrimeFactors(n));
     }
 
     private static int getSmallestPrimeFactors(int n) {
