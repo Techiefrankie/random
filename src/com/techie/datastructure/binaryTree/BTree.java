@@ -138,6 +138,22 @@ public class BTree {
         System.out.println("\nMax sum path: " + Collections.max(visited));
     }
 
+    public boolean isBST(Node node) {
+        return isBST(node, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+
+    private static boolean isBST(Node node, int min, int max) {
+        if (node == null) {
+            return true;
+        }
+
+        if (node.data <= min || node.data >= max) {
+            return false;
+        }
+
+        return isBST(node.left, min, node.data) && isBST(node.right, node.data, max);
+    }
+
     public static void main(String[] args) {
         BTree bst = new BTree();
         bst.insert(50);

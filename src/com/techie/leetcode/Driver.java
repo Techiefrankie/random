@@ -19,7 +19,7 @@ public class Driver {
 
         System.out.println(random.add(3,5));
 
-        System.out.println(random.runLengthCompression("aabccccdeeeaajk"));
+        System.out.println(" Run length compression of aabccccdeeeaajk = " + random.runLengthCompression("aabccccdeeeaajk"));
 
         System.out.println("B".compareTo("b"));
         System.out.println(Arrays.toString(random.moveZeroes(new int[]{0,9,0,6,0,7,0,8,0,3})));

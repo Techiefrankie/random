@@ -2,7 +2,7 @@ package com.techie.datastructure.list;
 
 public class Node<E> {
     private E nodeItem;
-    private Node nextNode;
+    public Node nextNode;
 
     public Node(E nodeItem) {
         this.nodeItem = nodeItem;
