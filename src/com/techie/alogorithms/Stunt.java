@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Stunt {
     /*
@@ -293,4 +294,48 @@ public class Stunt {
         return result.size() == s.length() ? 0 : result.size();
     }
 
+    /***
+     * Consider the following secret code list: [[apple,
+     *      * apple], [banana, anything, banana]]
+     *      * Based on the above secret code list, a customer
+     *      * who made either of the following purchases would
+     *      * win the prize:
+     *      * orange, apple, apple, banana, orange, banana
+     *      * apple, apple, orange, orange, banana, apple,
+     *      * banana, banana
+     *      List<String> codeList = Arrays.asList("orange", "banana", "apple", "anything", "banana");
+     *
+     *         List<String> shoppingCart = Arrays.asList("orange", "apple", "apple", "banana", "orange", "banana",
+     *                 "apple", "apple", "orange", "orange", "banana", "apple", "banana", "banana");
+     * @param codeList
+     * @param cart
+     * @return
+     */
+    public static boolean qualifiesForPromo(List<String> codeList, List<String> cart) {
+        int endIndex = codeList.size();
+
+        for (int startIndex = 0; startIndex < endIndex; startIndex++ ) {
+            List<String> subList = cart.subList(startIndex, endIndex++);
+
+            if (matches(codeList, subList)) {
+                System.out.println("Code List" + codeList);
+                System.out.println("Shopping Cart: " + subList);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static boolean matches(List<String> codeList, List<String> subList) {
+        for (int i = 0; i < codeList.size(); i++) {
+            String code = codeList.get(i);
+            String cart = subList.get(i);
+
+            boolean matches = code.equals(cart) || code.equals("anything");
+            if (!matches)
+                return false;
+        }
+        return true;
+    }
 }

@@ -8,6 +8,16 @@ public class Main {
     public static void main(String[] args) {
 	    System.out.println("Here we come!");
 
+        String[][] trainNetwork = new String[][] {
+                {"city1", "city2"},
+                {"city1", "city3"},
+                {"city2", "city3"},
+                {"city3", "city4"},
+                {"city2", "city5"},
+        };
+
+        System.out.println("Train routes: " + findTrainNetworks(trainNetwork, "city1", "city2"));
+
         // get maximum student's grade
         String[][] grades = {
                 {"Rachel", "100"},
@@ -123,7 +133,7 @@ public class Main {
     }
 
     private  static int binSearch (int element, int[] array, int low, int high){
-       if (high >= low){
+       if (high >= low) {
            int mid = (low + high) / 2;
 
            if (element == mid)
@@ -615,5 +625,60 @@ public class Main {
         if (close < open) {
             generateParenthesesRecursive(result, current + ")", open, close + 1, max);
         }
+    }
+
+    /***
+     * Given a multi-dimension array of cities showing a train's network
+     * [
+     * ["city1": "city2"],
+     * ["city1": "city3"],
+     * ["city2": "city3"],
+     * ["city3": "city4"],
+     * ["city2": "city5"],
+     * ]
+     * Given a source and target city, return the trains route.
+     */
+    private static String findTrainNetworks(String[][] trainNetwork, String city1, String city2) {
+        Map<String, List<String>> routes = new HashMap<>();
+
+        for (String[] network : trainNetwork) {
+            // if entry exists
+            if (routes.containsKey(network[0])) {
+                List<String> list = routes.get(network[0]);
+                list.add(network[1]);
+            } else {
+                // new entry
+                List<String> newList = new ArrayList<>();
+                newList.add(network[1]);
+                routes.put(network[0], newList);
+            }
+        }
+
+        if (!routes.containsKey(city1) && !routes.containsKey(city2)) {
+            return "";
+        }
+
+        List<String> city1Routes = routes.get(city1);
+        List<String> city2Routes = routes.get(city2);
+
+        // merge both routes
+        city1Routes.addAll(city2Routes);
+
+        StringBuilder sb = new StringBuilder();
+
+        if (!city1Routes.contains(city1)) {
+            sb.append(city1).append(",");
+        }
+        if (!city1Routes.contains(city2)) {
+            sb.append(city2).append(",");
+        }
+
+        Set<String> result = new HashSet<>(city1Routes);
+
+        for (String route : result) {
+            sb.append(route).append(",");
+        }
+
+        return sb.toString();
     }
 }

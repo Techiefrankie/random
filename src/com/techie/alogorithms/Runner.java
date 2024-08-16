@@ -26,6 +26,8 @@ public class Runner {
 
         int score = Stunt.winsPromo(codeList, shoppingCart);
 
+        System.out.println( "Qualifies for promo: " + Stunt.qualifiesForPromo(codeList, shoppingCart));
+
         List<String> repository = new ArrayList(Arrays.asList("mobile", "mouse", "moneypot","monitor", "mousepad"));
         String customerQuery = "mouse";
 

@@ -10,7 +10,7 @@ public class WorkFall {
 
         //find possibility of 5 numbers summing up 42 ...
 
-        System.out.println("Find sum: " + findSum(sum, input));
+        System.out.println("Find sum: " + findSum(5, sum, input));
 
 
         // second approach
@@ -18,7 +18,7 @@ public class WorkFall {
         int sum2 = 34; // Sample sum
         System.out.println("Array: " + Arrays.toString(array));
         System.out.println("Sum: " + sum2);
-        System.out.println("Has combination: " + hasCombination(array, sum2));
+        System.out.println("Has combination: " + hasCombination(array, sum2, 5));
     }
 
 
